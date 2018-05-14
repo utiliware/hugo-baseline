@@ -1,0 +1,90 @@
+baseurl = "https://www.inoutclock.com/"
+title = "Utiliware Corporation"
+languageCode = "en-us"
+
+# Pagination
+paginate = 5
+paginatePath = "page"
+
+# Theme to use
+theme = "utw"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+# Google analytics
+googleAnalytics = "UA-xxxxxx"
+
+# Languages
+defaultContentLanguage = "en"
+
+[languages.en]
+  languageName = "English"
+
+  [[languages.en.menu.main]]
+    url = "/"
+    name = "Home"
+    weight = 1
+  [[languages.en.menu.main]]
+    url = "/about/"
+    name = "About"
+    weight = 2
+  [[languages.en.menu.main]]
+    url = "/contact/"
+    name = "Contact"
+    weight = 3
+  [[languages.en.menu.main]]
+    url = "/blog/"
+    name = "Blog"
+    weight = 4
+
+[languages.es]
+  languageName = "Español"
+
+  [[languages.es.menu.main]]
+    url = "/es/"
+    name = "Casa"
+    weight = 1
+  [[languages.es.menu.main]]
+    url = "/about/"
+    name = "Acerca de"
+    weight = 2
+  [[languages.es.menu.main]]
+    url = "/contact/"
+    name = "Contacto"
+    weight = 3
+  # [[languages.es.menu.main]]
+  #   url = "/blog/"
+  #   name = "Blog"
+  #   weight = 4
+
+# Links format
+
+[permalinks]
+  # post = "/:year/:month/:title/:slug/"
+  # post = “/blog/:year/:month/:day/:slug/”
+  post = "/blog/:slug/"
+
+[params]
+  # Main sections (currently used for the recent posts in the sidebar)
+  mainSections = ["post"]
+
+  # Default author
+  author = "Willliam Dale, PE"
+
+  # Date format (default: Jan 2, 2006)
+  # date_format = "Jan 2, 2006"
+
+  # Display post summaries instead of content in list templates (default: true)
+  # truncate = false
+
+  [params.sidebar]
+    # Weather to show the recent posts or not (default: true)
+    # showRecent = false
+
+    # Weather to show the taxonomies or not (default: true)
+     showTaxonomy = true
+
+    # How many posts to show on the sidebar (Default: 5)
+     num_recent_posts = 3

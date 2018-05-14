@@ -1,0 +1,43 @@
+# https://github.com/gohugoio/hugo/releases
+
+version: 0.2
+
+env:
+  variables:
+    HUGO_DOWNLOAD: "tool-chest/hugo/hugo_0.40.3_Linux-64bit.tar.gz"
+    # HUGO_DOWNLOAD: "tool-chest/hugo/hugo_0.40.2_Linux-64bit.tar.gz"
+    HUGO_SHA256: "a3913a5aca407b8badaba30dec764c2615fc59dd0e73129ddaf5cca0e75a475f"
+    # HUGO_SHA256: "377b9b0d313556690d376e28cecf216c3e61f1e13c631ebf86068f892ca07709"
+
+    HUGO_BUCKET: "www.inoutclock.com"
+
+phases:
+  install:
+    commands:
+      # - apt-get update -y
+      - aws s3 cp s3://${HUGO_DOWNLOAD} /tmp/hugo.tar.gz
+      - sha256sum /tmp/hugo.tar.gz
+      - echo "${HUGO_SHA256}  /tmp/hugo.tar.gz" | sha256sum -c -
+      - tar xf /tmp/hugo.tar.gz -C /tmp
+      - mv /tmp/hugo /usr/bin/hugo
+      - rm -rf /tmp/hugo*
+      - pwd
+      - ls -la
+
+  pre_build:
+    commands:
+      - echo pre_build...
+      # - env
+      - go version
+      - hugo version
+      - aws --version
+
+  build:
+    commands:
+      - echo Running hugo...
+      - ls -la
+      - hugo
+      
+  post_build:
+    commands:
+      - aws s3 sync --delete ./public s3://${HUGO_BUCKET} --cache-control max-age=300
